@@ -54,10 +54,21 @@ function mainMenu(person, people){
     return mainMenu(person, people); // ask again
   }
 }
+function upperCaseFirstLetter(phrase){
+    let separate = phrase.split(" "); 
+
+    for(let i = 0; i < separate.length; i++){
+        separate[i] = separate[i].charAt(0).toUpperCase() + separate[i].substring(1).toLowerCase();
+    }
+    return separate.join(" ");
+}
 
 function searchByName(people){
-  let firstName = promptFor("What is the person's first name?", chars);
-  let lastName = promptFor("What is the person's last name?", chars);
+  let firstName = upperCaseFirstLetter(promptFor("What is the person's first name?", chars));
+  let lastName = upperCaseFirstLetter(promptFor("What is the person's last name?", chars));
+
+  // let capFirstName = upperCaseFirstLetter(firstName);
+  // let capLastName = upperCaseFirstLetter(lastName);
 
   let foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
@@ -66,19 +77,29 @@ function searchByName(people){
     else{
       return false;
     }
-  })
+  });
 
   // let morePeople = people;
  	// morePeople = searchbyGender
  	// 	morePeople = searchbyAge(morePeople);
   // Dynamically add age
   // Dynamically add alternate names and nicknames, such as Bob for Robert, or The Grey Man, or Flamingo
-  // Create function that finds a partial match, take name and divide into separate characters then search until no match
+  // create a function that searches the array and finds a match
   // TODO: find the person using the name they entered
-  return foundPerson;
+  console.log(foundPerson);
 }
 
-//Create function searchbyCriteria
+searchByName(data);
+
+// function findCriter(people){
+  
+// }
+//two possible methods:
+//method one: attempt recursion to the point where it calls to a specified location within the object
+//method two: use switch case in conjunction with a prompt
+
+
+// console.log(data.prototype);
 
 // alerts a list of people
 function displayPeople(people){
@@ -86,6 +107,8 @@ function displayPeople(people){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
+
+
 // When looking for descendants or family(link it to the main menu)
 function displayPerson(person){
   // print all of the information about a person:
