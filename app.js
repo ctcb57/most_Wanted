@@ -37,9 +37,13 @@ function mainMenu(person, people){
   // Create a function to gather info for each case with an alert
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+        console.log(displayInfo(person));
+        alert(displayInfo(person));// TODO: get person's info
     break;
-    case "family": //descendants + spouse
+    case "family":
+        console.log(displayId(person));
+        // console.log(displayFamily(person));
+        // alert(displayFamily(person)); //descendants + spouse
     // TODO: get person's family
     break;
     case "descendants": //need recursion here
@@ -86,10 +90,10 @@ function searchByName(people){
   // Dynamically add alternate names and nicknames, such as Bob for Robert, or The Grey Man, or Flamingo
   // create a function that searches the array and finds a match
   // TODO: find the person using the name they entered
-  console.log(foundPerson);
+  return foundPerson[0];
 }
 
-searchByName(data);
+// searchByName(data);
 
 // function findCriter(people){
   
@@ -118,7 +122,35 @@ function displayPerson(person){
   // TODO: finish getting the rest of the information to display(basically going to show the object)
   alert(personInfo);
 }
+function displayInfo(person){
+    let personInfo = "First Name: " + person.firstName + "\n";
+    personInfo += "Last Name: " + person.lastName + "\n";
+    personInfo += "gender: " + person.gender + "\n";
+    personInfo += "dob: " + person.dob + "\n";
+    personInfo += "height: " + person.height + "\n";
+    personInfo += "weight: " + person.weight + "\n";
+    personInfo += "eyeColor: " + person.eyeColor + "\n";
+    personInfo += "occupation: " + person.occupation + "\n";
+    return(personInfo);
+}
+function displayFamily(person){
+    let personInfo = "First Name: " + person.firstName + "\n";
+    personInfo += "Last Name: " + person.lastName + "\n";
+    personInfo += "currentSpouse: " + person.currentSpouse + "\n";
+    return personInfo;
+}
+// function displayDescendants(person){
+//     let personInfo = person.id;
+//     for(let i = 0; i < data.length; i++)
+//         if(person.id = person[i].parents);
+//     return person[i];
+// }
 
+function displayId(person){
+    let personInfo = [];
+    personInfo.push = person.id
+    return personInfo;
+}
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
