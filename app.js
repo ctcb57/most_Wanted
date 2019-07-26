@@ -12,6 +12,33 @@ function app(people){
       mainMenu(foundPerson, people);
       break;
     case 'no':
+  let searchTrait = promptFor("Do you know any traits of the person you are looking for? If yes enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If no enter 'no'.", chars);
+        switch(searchTrait){
+          case 'gender':
+          let userInput = promptFor("Enter gender.", chars);
+          console.log(searchByGender(people, userInput));
+          break;
+          case 'age':
+
+          break;
+          case 'height':
+
+          break;
+          case 'weight':
+
+          break;
+          case 'eye color':
+
+          break;
+          case 'occupation':
+
+          break;
+          case 'no':
+
+          break;
+
+        }
+
     //use yesNo function to search for traits in yes no tree
       // TODO: search by traits
     // alerts for each person returned for each criteria
@@ -138,14 +165,105 @@ function displayFamily(person){
     personInfo += "Last Name: " + person.lastName + "\n";
     personInfo += "currentSpouse: " + person.currentSpouse + "\n";
     return personInfo;
+}
+
+function searchByGender(array, str){
+  let foundGender = array.filter(function(person){
+        if(person.gender == str){
+          console.log(person.firstName + " " + person.lastName);
+            return true;
+        }
+        else{
+          return false;
+        }     
+  });
+  return foundGender;
+}
+
+function searchByEyeColor(array, response){
+  let foundEyeColor = array.filter(function(person){
+        if(person.eyeColor == response){
+          console.log(person.firstName + " " + person.lastName);
+            return true;
+        }
+        else{
+          return false;
+        }     
+  });
+  return foundEyeColor;
+}
+
+function searchByHeight(array, response){
+  let foundHeight = array.filter(function(person){
+        if(person.height == response){
+          console.log(person.firstName + " " + person.lastName);
+            return true;
+        }
+        else{
+          return false;
+        }     
+  });
+  return foundHeight;
+}
+
+function searchByWeight(array, response){
+  let foundWeight = array.filter(function(person){
+        if(person.weight == response){
+          console.log(person.firstName + " " + person.lastName);
+            return true;
+        }
+        else{
+          return false;
+        }     
+  });
+  return foundWeight;
+}
+
+function searchByAge(array, response){
+  let foundAge = array.filter(function(person){
+        if(person.age == response){
+          console.log(person.firstName + " " + person.lastName);
+            return true;
+        }
+        else{
+          return false;
+        }     
+  });
+  return foundAge;
+}
+
+function searchByOccupation(array, response){
+  let foundOccupation = array.filter(function(person){
+        if(person.occupation == response){
+          console.log(person.firstName + " " + person.lastName);
+            return true;
+        }
+        else{
+          return false;
+        }     
+  });
+  return foundOccupation;
+}
 
 //dynamically add property currentSpouseName
-}
+
 // function displayDescendants(person){
 //     let personInfo = person.id;
 //     for(let i = 0; i < data.length; i++)
 //         if(person.id = person[i].parents);
 //     return person[i];
+// // }
+// function displayGender(array, person){
+//   let genderInfo = [];
+//     for(i = 0, i < array.length; i++){
+//       if(data[i].gender = male){
+//         genderInfo = data[i].gender;
+//       }
+//       else{
+//         genderInfo = data[i].gender;
+//       }
+//     }
+//     return genderInfo;
 // }
 
 function displayId(person){
