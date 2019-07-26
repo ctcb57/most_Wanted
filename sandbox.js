@@ -1,4 +1,89 @@
-// let foundParents = data.map(function(e){
+let person = data[8];
+// console.log(person);
+
+//this function takes the person that is taken from the prompt and pulls their ID number
+function pullIdNumber(person){
+    let id = person.id;
+    return id;
+}
+let testiD = (pullIdNumber(person));
+
+
+// 822843554
+
+function createParentIdArrays(array){//Creates 2 Arrays of parent id
+    let test2 = [];
+    let a = array.map(a => a.parents[0]);
+    let b = array.map(a => a.parents[1]);
+    test2.push(a);
+    test2.push(b);
+    return test2;
+}
+
+let testArray = createParentIdArrays(data);
+// console.log(testArray);
+
+// let a = data.map(a => a.parents[0]);
+// console.log(a);
+
+function searchForParentMatch(array, value){
+    let indexes = [], i = -1, j = -1;
+    while((i = array[0].indexOf(value, i + 1)) != -1){
+        indexes.push(i);
+    }
+    while((j = array[1].indexOf(value, j + 1)) != -1){
+        indexes.push(j);
+    }
+    return indexes;
+}
+
+let testChildArray = searchForParentMatch(testArray, 693243224);
+// console.log(testChildArray);
+
+function convertIndexToObject(array, childIndex){
+    let objectArray = [];
+    for(let i = 0; i < array.length && i < childIndex.length; i++){
+            // console.log(people[i]);
+            objectArray.push(array[childIndex[i]]);
+        }
+    
+    // console.log(objectArray);
+    return objectArray;
+}
+console.log(convertIndexToObject(data, testChildArray));
+
+// convertIndexToObject(data, )
+// console.log(searchForParentMatch(testArray, 693243224));
+
+// searches the array and returns an array of the indexes where the match occurs
+// function getAllIndexes(arr, val) {
+//     var indexes = [], i = -1;
+//     while ((i = arr.indexOf(val, i+1)) != -1){
+//         indexes.push(i);
+//     }
+//     return indexes;
+// }
+
+// console.log(getAllIndexes(a, 693243224));
+
+// final product of the function
+// function findChild(array, person){
+//     // let descendantArray = []
+//     let separateArrays = createParentIdArrays(array);
+//     let idMatch = searchForParentMatch(separateArrays, person.id);
+//     let children = 
+//     console.log(person.id);
+//     console.log(separateArrays);
+//     console.log(idMatch);
+// }
+
+// findChild(data, person);
+
+
+
+
+
+// / let foundParents = data.map(function(e){
 //   return e.parents.e;
 // }).indexOf(693243224);
 
@@ -129,15 +214,15 @@
 //         console.log("found it");
 //     }
 // }
-function findChild(array, index){//takes index value and returns child name
-    for (var i=0; i<array.length; i++) {
-        if(i == index){
-        return data[index].firstName + " " + data[index].lastName;
-        }
-    }
-}
+// function findChild(array, index){//takes index value and returns child name
+//     for (var i=0; i<array.length; i++) {
+//         if(i == index){
+//         return data[index].firstName + " " + data[index].lastName;
+//         }
+//     }
+// }
 
-console.log(findChild(data, 16));
+// console.log(findChild(data, 16));
 
 // function findChild(array, obj){
 
@@ -158,6 +243,7 @@ console.log(findChild(data, 16));
 //     return indexes;
 // }
 
+//function that returns an array of the indexes
 // function getAllIndexes(arr, val) {
 //     var indexes = [], i = -1;
 //     while ((i = arr.indexOf(val, i+1)) != -1){
@@ -166,7 +252,7 @@ console.log(findChild(data, 16));
 //     return indexes;
 // }
 
-// console.log(getAllIndexes(return, 693243224));
+// console.log(getAllIndexes(a, 693243224));
 
 // let findParentIndex = result.indexOf(693243224);
 // let findParentIndex2 = result2.indexOf(693243224);
@@ -187,6 +273,21 @@ console.log(findChild(data, 16));
 // console.log(repeat);
 // console.log(repeatAgain);
 // console.log(repeat2);
+
+//function that searches by gender
+// function searchByGender(array, response){
+//     let foundGender = array.filter(function(person){
+//            if(person.gender == response){
+//                  return true;
+//            }
+//            else{
+//                return false;
+//            }         
+//     });
+//     return foundGender;
+// }
+// console.log(searchByGender(data, "female"));
+
 
 //game plan:
 //use the functions examples above in order to pull all of the parents arrays out of data
