@@ -14,8 +14,8 @@ function app(people){
     case 'no':
     //use yesNo function to search for traits in yes no tree
       // TODO: search by traits
-      // alerts for each person returned for each criteria
-      // call this function Guess Who, start with criteria with largest search result, i.e. age, eye color, in descending amounts
+    // alerts for each person returned for each criteria
+    // call this function Guess Who, start with criteria with largest search result, i.e. age, eye color, in descending amounts
       break;
       default:
     app(people); // restart app //create an alert saying no match found
@@ -41,9 +41,9 @@ function mainMenu(person, people){
         alert(displayInfo(person));// TODO: get person's info
     break;
     case "family":
-        console.log(displayId(person));
+        console.log(displayFamily(person));
         // console.log(displayFamily(person));
-        // alert(displayFamily(person)); //descendants + spouse
+        // alert(displayFamily(person)); //siblings + parents + spouse + children
     // TODO: get person's family
     break;
     case "descendants": //need recursion here
@@ -138,6 +138,8 @@ function displayFamily(person){
     personInfo += "Last Name: " + person.lastName + "\n";
     personInfo += "currentSpouse: " + person.currentSpouse + "\n";
     return personInfo;
+
+//dynamically add property currentSpouseName
 }
 // function displayDescendants(person){
 //     let personInfo = person.id;
@@ -168,3 +170,4 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+

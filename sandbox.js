@@ -8,11 +8,13 @@
 
 // console.log(foundParent);
 
-// function getById(arr, value){
+// function getById(arr, value){ //returns child properties (note: not name) from array
 //   for(let i = 0; i < arr.length ; i++){
-//     if(arr[i].parents[i] == 693243224) return arr[i];
+//     if(arr[i].parents[0] == 693243224) return arr[i];
 //   }
-// // }
+// }
+// console.log(getById(data));
+
 // let array = [];
 // for(let i = 0; i < data.length; i++){
 //     array.push(data[i].parents);
@@ -49,16 +51,62 @@
 //         console.log(result);
 //     }
 // }
-
 // for(let i = 0; i < data.parents.length; i++){
 //     console.log(data.map(data => data.parents[i]));
 // }
+// function findParentId(array, property){
+// for(let i = 0; i < data.property.length; i++){
+//     console.log(data.map(data => data.property[i]));
+// }
+// }
+// findParentId(data, parents);
 
+// function findParentId(array){//Creates 2 Arrays of parent id
+// 	let test2 = [];
+// 	let a = array.map(a => a.parents[0]);
+// 	let b = array.map(a => a.parents[1]);
+// 	test2.push(a);
+// 	test2.push(b);
+// 	return test2;
+// }
+// console.log(findParentId(data));
+// function getAge(dateString) {
+//     let today = new Date();
+//     let birthDate = new Date(dateString);
+//     let age = today.getFullYear() - birthDate.getFullYear();
+//     let m = today.getMonth() - birthDate.getMonth();
+//     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+//         age--;
+//     }
+//     return age;
+// }
+// console.log(getAge(19920405))
 
-let result = data.map(a => a.parents[0]);
-let result2 = data.map(a => a.parents[1]);
+// function getAge(str){ //gets age from string
+// 	let today = new Date();
+// 	let birthDate = new Date(str);
+//     let m = today.getMonth() - birthDate.getMonth();
+//     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+//         age--;
+//     }
+//     let age = today.getFullYear() - birthDate.getFullYear();
+//     return age;
+// }
+// console.log(getAge("4/5/1977"));
+
+// function checkAge(array){ //attempt to get array of ages
+// 	for(let i = 0, i.data.length, i++);
+// 		[i] == age
+// 	return data[i]person.firstName + " " + data[i]person.lastName;
+// }
+// console.log(getAge(data));
+
+// let result = data.map(a => a.parents[0]);
+// let result2 = data.map(a => a.parents[1]);
 // console.log(result);
 // console.log(result2);
+
+
 // let testParentId = 693243224;
 
 // function findPerson(array, index, property){
@@ -81,7 +129,7 @@ let result2 = data.map(a => a.parents[1]);
 //         console.log("found it");
 //     }
 // }
-function test(array, index){
+function findChild(array, index){//takes index value and returns child name
     for (var i=0; i<array.length; i++) {
         if(i == index){
         return data[index].firstName + " " + data[index].lastName;
@@ -89,7 +137,11 @@ function test(array, index){
     }
 }
 
-console.log(test(data, 17));
+console.log(findChild(data, 16));
+
+// function findChild(array, obj){
+
+// }
 
 
 // Object.keys(data).forEach(function (key) {
@@ -114,7 +166,8 @@ console.log(test(data, 17));
 //     return indexes;
 // }
 
-// console.log(getAllIndexes(result, 693243224));
+// console.log(getAllIndexes(return, 693243224));
+
 // let findParentIndex = result.indexOf(693243224);
 // let findParentIndex2 = result2.indexOf(693243224);
 
