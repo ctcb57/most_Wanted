@@ -1,14 +1,16 @@
+// let person = data[16];
+// console.log(person);
 
 "use strict"
 
-// function createParentIdArrays(array){//Creates 2 Arrays of parent id
-//     let test2 = [];
-//     let a = array.map(a => a.parents[0]);
-//     let b = array.map(a => a.parents[1]);
-//     test2.push(a);
-//     test2.push(b);
-//     return test2;
-// }
+function createParentIdArrays(array){//Creates 2 Arrays of parent id
+    let test2 = [];
+    let a = array.map(a => a.parents[0]);
+    let b = array.map(a => a.parents[1]);
+    test2.push(a);
+    test2.push(b);
+    return test2;
+}
 
 // let parent = data[8];
 // // console.log(person);
@@ -40,16 +42,16 @@
 // console.log(a);
 
 
-// function searchForParentMatch(array, value){
-//     let indexes = [], i = -1, j = -1;
-//     while((i = array[0].indexOf(value, i + 1)) != -1){
-//         indexes.push(i);
-//     }
-//     while((j = array[1].indexOf(value, j + 1)) != -1){
-//         indexes.push(j);
-//     }
-//     return indexes;
-// }
+function searchForParentMatch(array, value){
+    let indexes = [], i = -1, j = -1;
+    while((i = array[0].indexOf(value, i + 1)) != -1){
+        indexes.push(i);
+    }
+    while((j = array[1].indexOf(value, j + 1)) != -1){
+        indexes.push(j);
+    }
+    return indexes;
+}
 
 // function searchForParentMatch(array, value){
 //     let indexes = [], i = -1, j = -1;
@@ -78,13 +80,13 @@
 //     return objectArray;
 // }
 
-// function convertIndexToObject(array, childIndex){
-//     let objectArray = [];
-//     for(let i = 0; i < array.length && i < childIndex.length; i++){
-//             objectArray.push(array[childIndex[i]]);
-//         }
-//     return objectArray;
-// }
+function convertIndexToObject(array, childIndex){
+    let objectArray = [];
+    for(let i = 0; i < array.length && i < childIndex.length; i++){
+            objectArray.push(array[childIndex[i]]);
+        }
+    return objectArray;
+}
 
 // console.log(convertIndexToObject(data, testChildArray));
 
@@ -102,25 +104,17 @@
 
 // console.log(getAllIndexes(a, 693243224));
 
-// function printChildNames(objectArray){
-//     let listOfNames = [];
-//     for(let i = 0; i < objectArray.length; i++){
-//         let personInfo = "Child: " + objectArray[i].firstName + " " + objectArray[i].lastName;
-//         // console.log(personInfo);
-//         listOfNames.push(personInfo);
-//     }
-//     return listOfNames;
-// }
+function printChildNames(objectArray){
+    let listOfNames = [];
+    for(let i = 0; i < objectArray.length; i++){
+        let personInfo = "Child: " + objectArray[i].firstName + " " + objectArray[i].lastName;
+        // console.log(personInfo);
+        listOfNames.push(personInfo);
+    }
+    return listOfNames;
+}
 
 
-// // final product of the function
-// function findChild(array, parent){
-//     let separateArrays = createParentIdArrays(array);
-//     let idMatch = searchForParentMatch(separateArrays, parent.id);
-//     let children = convertIndexToObject(data, idMatch);
-//     let childrenNames = (printChildNames(children));
-//     return childrenNames;
-// }
 
 // function findDescendants(array, parent){
 //     let descendants = [];
@@ -141,8 +135,137 @@
 //     return descendants;
     
 // }
+let person = data[19];
+
+function pullParent1IdNumbers(person){
+    let parent1 = person.parents[0];
+    return parentId
+}
+
+function pullParent2IdNumbers(person){
+    let parent
+}
+
+function verifySiblingIdMatch(array, person){
+    siblingArray = [];
+    personArray = [];
+    for(let i = 0; i < array.length; i++){
+        if(array[i].id != person.id){
+            siblingArray.push(array[i]);
+        }
+        else{
+            siblingArray.push(array[i]);
+        }
+    }
+    return siblingArray;
+}
+
+function removePersonFromArray(array, person){
+    let siblings = [];
+    for(let i = 0; i < array.length; i++){
+        if(array[i].id != person.id){
+            siblings.push(array[i]);
+        }
+    }
+    return siblings;
+}
+
+function printSiblingNames(objectArray){
+    let listOfNames = [];
+    for(let i = 0; i < objectArray.length; i++){
+        let personInfo = "Sibling: " + objectArray[i].firstName + " " + objectArray[i].lastName;
+        // console.log(personInfo);
+        listOfNames.push(personInfo);
+    }
+    return listOfNames;
+}
+
+// console.log(pullParentIdNumbers(person));
 
 // alert(printChildNames(findDescendants(data, parent)));
+
+//change the code to remove all of the empty indexes 
+
+
+function findSiblings(array, person){
+    if(person.parents.length == 0){
+        console.log("no siblings");
+    }
+    else{
+        let separateArrays = createParentIdArrays(array);
+        let parent1Match = searchForParentMatch(separateArrays, person.parents[0]);
+        let parent2Match = searchForParentMatch(separateArrays, person.parents[1]);
+        let intersection = parent1Match.filter(element => parent2Match.includes(element));
+        let childrenObjects = convertIndexToObject(data, intersection);
+        let siblingObjects = removePersonFromArray(childrenObjects, person);
+        let siblingNames = printSiblingNames(siblingObjects);
+        return siblingNames;
+    }
+}
+
+// findSiblings(data, person);
+
+
+// final product of the function
+function findChild(array, person){
+    let separateArrays = createParentIdArrays(array);
+    let idMatch = searchForParentMatch(separateArrays, person.id);
+    let children = convertIndexToObject(data, idMatch);
+    let childrenNames = (printChildNames(children));
+    return childrenNames;
+}
+
+function currentSpouseMatch(array, person){
+    for(let i = 0; i < array.length; i++){
+        if(array[i].id == person.currentSpouse){
+            let spouse = "Spouse: " + array[i].firstName + " " + array[i].lastName;
+            return spouse;
+        }
+    }
+}
+
+function firstParentMatch(array, person){
+    for(let i = 0; i < array.length; i++){
+        if(array[i].id == person.parents[0]){
+            let parent1 = "Parent: " + array[i].firstName + " " + array[i].lastName;
+            return parent1;
+        }
+    }
+}
+
+function secondParentMatch(array, person){
+    for(let i = 0; i < array.length; i++){
+        if(array[i].id == person.parents[1]){
+            let parent2 = "Parent: " + array[i].firstName + " " + array[i].lastName;
+            return parent2;
+        }
+    }
+}
+
+
+
+
+function convertSpouseId(array, person){
+    let spouseIndex = searchForSpouseMatch(array, person.currentSpouse);
+    // console.log(spouseIndex);
+}
+// convertSpouseId(data, person);
+
+function createFamily(array, person){
+    let family = [];
+    let familyFinal = [];
+    family.push(findChild(array, person));
+    family.push(findSiblings(array, person));
+    family.push(currentSpouseMatch(array, person))
+    family.push(firstParentMatch(array, person));
+    family.push(secondParentMatch(array, person));
+    let filtered = family.filter(function (el) {
+        return el != null;
+      });
+    alert(filtered.join("\n"));
+}
+
+createFamily(data, person);
 
 
 
@@ -254,39 +377,39 @@
 // }
 // console.log(multiTraitSearch(data));
 
-function singleTraitSearch(people){
-      let searchTrait = promptFor("Do you know any traits of the person you are looking for? If yes enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If not enter 'no'.", chars);
-        switch(searchTrait){
-          case 'gender':
-          let genderInput = promptFor("Enter gender:", chars);
-          console.log(searchByGender(data, genderInput));
-          break;
-          case 'age':
-          let ageInput = promptFor("Enter age:", chars);
-          console.log(searchByAge(people, ageInput));
-          break;
-          case 'height':
-          let heightInput = promptFor("Enter height in inches (ex. 5ft. 8in. is '68'):", chars);
-          console.log(searchByHeight(people, heightInput));
-          break;
-          case 'weight':
-          let weightInput = promptFor("Enter weight:", chars);
-          console.log(searchByWeight(people, weightInput));
-          break;
-          case 'eye color':
-          let eyeInput = promptFor("Enter eye color:", chars);
-          console.log(searchByEyeColor(people, eyeInput));
-          break;
-          case 'occupation':
-          let occupationInput = promptFor("Enter occupation:", chars);
-          console.log(searchByOccupation(people, occupationInput));
-          break;
-          case 'no':
-            app(people);
-          break;
-        }
-}
-console.log(singleTraitSearch(data));
+// function singleTraitSearch(people){
+//       let searchTrait = promptFor("Do you know any traits of the person you are looking for? If yes enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If not enter 'no'.", chars);
+//         switch(searchTrait){
+//           case 'gender':
+//           let genderInput = promptFor("Enter gender:", chars);
+//           console.log(searchByGender(data, genderInput));
+//           break;
+//           case 'age':
+//           let ageInput = promptFor("Enter age:", chars);
+//           console.log(searchByAge(people, ageInput));
+//           break;
+//           case 'height':
+//           let heightInput = promptFor("Enter height in inches (ex. 5ft. 8in. is '68'):", chars);
+//           console.log(searchByHeight(people, heightInput));
+//           break;
+//           case 'weight':
+//           let weightInput = promptFor("Enter weight:", chars);
+//           console.log(searchByWeight(people, weightInput));
+//           break;
+//           case 'eye color':
+//           let eyeInput = promptFor("Enter eye color:", chars);
+//           console.log(searchByEyeColor(people, eyeInput));
+//           break;
+//           case 'occupation':
+//           let occupationInput = promptFor("Enter occupation:", chars);
+//           console.log(searchByOccupation(people, occupationInput));
+//           break;
+//           case 'no':
+//             app(people);
+//           break;
+//         }
+// }
+// console.log(singleTraitSearch(data));
 
 // function traitSearch(array, response){
 // 	let result = [];

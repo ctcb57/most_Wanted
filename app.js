@@ -48,10 +48,7 @@ function mainMenu(person, people){
         alert(displayInfo(person));// TODO: get person's info
     break;
     case "family":
-        findChild(data, person);
-        // console.log(displayFamily(person));
-        // console.log(displayFamily(person));
-        // alert(displayFamily(person)); //siblings + parents + spouse + children
+        createFamily(data, person);
     // TODO: get person's family
     break;
     case "descendants": 
@@ -393,9 +390,7 @@ function findChild(array, parent){
   let idMatch = searchForParentMatch(separateArrays, parent.id);
   let children = convertIndexToObject(data, idMatch);
   let childrenNames = (printChildNames(children));
-  alert(childrenNames.join("\n"));
   return childrenNames;
-  
 }
 
 function findDescendants(array, parent){
@@ -418,4 +413,93 @@ function findDescendants(array, parent){
   
 }
 
+function verifySiblingIdMatch(array, person){
+  siblingArray = [];
+  personArray = [];
+  for(let i = 0; i < array.length; i++){
+      if(array[i].id != person.id){
+          siblingArray.push(array[i]);
+      }
+      else{
+          siblingArray.push(array[i]);
+      }
+  }
+  return siblingArray;
+}
+
+function removePersonFromArray(array, person){
+  let siblings = [];
+  for(let i = 0; i < array.length; i++){
+      if(array[i].id != person.id){
+          siblings.push(array[i]);
+      }
+  }
+  return siblings;
+}
+
+function printSiblingNames(objectArray){
+  let listOfNames = [];
+  for(let i = 0; i < objectArray.length; i++){
+      let personInfo = "Sibling: " + objectArray[i].firstName + " " + objectArray[i].lastName;
+      // console.log(personInfo);
+      listOfNames.push(personInfo);
+  }
+  return listOfNames;
+}
+
+function findSiblings(array, person){
+  if(person.parents.length == 0){
+      console.log("No Siblings")
+  }
+  else{
+      let separateArrays = createParentIdArrays(array);
+      let parent1Match = searchForParentMatch(separateArrays, person.parents[0]);
+      let parent2Match = searchForParentMatch(separateArrays, person.parents[1]);
+      let intersection = parent1Match.filter(element => parent2Match.includes(element));
+      let childrenObjects = convertIndexToObject(data, intersection);
+      let siblingObjects = removePersonFromArray(childrenObjects, person);
+      let siblingNames = printSiblingNames(siblingObjects);
+      return siblingNames;
+  }
+}
+
+function currentSpouseMatch(array, person){
+  for(let i = 0; i < array.length; i++){
+      if(array[i].id == person.currentSpouse){
+          let spouse = "Spouse: " + array[i].firstName + " " + array[i].lastName;
+          return spouse;
+      }
+  }
+}
+
+function firstParentMatch(array, person){
+  for(let i = 0; i < array.length; i++){
+      if(array[i].id == person.parents[0]){
+          let parent1 = "Parent: " + array[i].firstName + " " + array[i].lastName;
+          return parent1;
+      }
+  }
+}
+
+function secondParentMatch(array, person){
+  for(let i = 0; i < array.length; i++){
+      if(array[i].id == person.parents[1]){
+          let parent2 = "Parent: " + array[i].firstName + " " + array[i].lastName;
+          return parent2;
+      }
+  }
+}
+
+function createFamily(array, person){
+  let family = [];
+  family.push(findChild(array, person));
+  family.push(findSiblings(array, person));
+  family.push(currentSpouseMatch(array, person))
+  family.push(firstParentMatch(array, person));
+  family.push(secondParentMatch(array, person));
+  let filtered = family.filter(function (el) {
+      return el != null;
+    });
+  alert(filtered.join("\n"));
+}
 
