@@ -91,9 +91,6 @@ function findChild(array, parent){
 console.log(findChild(data, parent));
 
 
-
-
-
 // / let foundParents = data.map(function(e){
 //   return e.parents.e;
 // }).indexOf(693243224);
@@ -164,6 +161,98 @@ console.log(findChild(data, parent));
 // 	test2.push(a);
 // 	test2.push(b);
 // 	return test2;
+
+function searchByGender(array, response){
+	let foundGender = array.filter(function(person){
+    		if(person.gender == response){
+    			 console.log(person.firstName + " " + person.lastName);
+      			return true;
+    		}
+    		else{
+    			return false;
+    		} 		
+	});
+	return foundGender;
+}
+
+function searchByEyeColor(array, response){
+	let foundEyeColor = array.filter(function(person){
+    		if(person.eyeColor == response){
+    			console.log(person.firstName + " " + person.lastName);
+      			return true;
+    		}
+    		else{
+    			return false;
+    		} 		
+	});
+	return foundEyeColor;
+}
+
+function searchByHeight(array, response){
+	let foundHeight = array.filter(function(person){
+    		if(person.height == response){
+    			console.log(person.firstName + " " + person.lastName);
+      			return true;
+    		}
+    		else{
+    			return false;
+    		} 		
+	});
+	return foundHeight;
+}
+
+function searchByWeight(array, response){
+	let foundWeight = array.filter(function(person){
+    		if(person.weight == response){
+    			console.log(person.firstName + " " + person.lastName);
+      			return true;
+    		}
+    		else{
+    			return false;
+    		} 		
+	});
+	return foundWeight;
+}
+
+function searchByAge(array, response){
+	let foundAge = array.filter(function(person){
+    		if(person.age == response){
+    				console.log(person.firstName + " " + person.lastName);
+      			return true;
+    		}
+    		else{
+    			return false;
+    		} 		
+	});
+	return foundAge;
+}
+
+function searchByOccupation(array, response){
+	let foundOccupation = array.filter(function(person){
+    		if(person.occupation == response){
+    			console.log(person.firstName + " " + person.lastName);
+      			return true;
+    		}
+    		else{
+    			return false;
+    		} 		
+	});
+	return foundOccupation;
+}
+
+// function displayGender(array, person){
+//     for (let i = 0; i < array.length; i++){
+//       if(array[i].person.gender == male){
+//         return person.firstName + " " + person.lastName;
+//       }
+//       else{
+//         return person.firstName + " " + person.lastName;
+//       }
+//     }
+// }
+// console.log(displayGender(data));
+
+
 // }
 // console.log(findParentId(data));
 // function getAge(dateString) {
@@ -178,17 +267,22 @@ console.log(findChild(data, parent));
 // }
 // console.log(getAge(19920405))
 
-// function getAge(str){ //gets age from string
-// 	let today = new Date();
-// 	let birthDate = new Date(str);
-//     let m = today.getMonth() - birthDate.getMonth();
-//     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-//         age--;
-//     }
-//     let age = today.getFullYear() - birthDate.getFullYear();
-//     return age;
-// }
-// console.log(getAge("4/5/1977"));
+function getAge(str){ //gets age from string
+	let today = new Date();
+	let birthDate = new Date(str);
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    let age = today.getFullYear() - birthDate.getFullYear();
+    return age;
+}
+
+data.age = getAge(data.dob);
+
+console.log(getAge(data[0].dob));
+
+
 
 // function checkAge(array){ //attempt to get array of ages
 // 	for(let i = 0, i.data.length, i++);
