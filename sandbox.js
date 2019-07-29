@@ -1,56 +1,42 @@
-let person = data[8];
-// console.log(person);
+"use strict"
 
-//this function takes the person that is taken from the prompt and pulls their ID number
-function pullIdNumber(person){
-    let id = person.id;
-    return id;
-}
-let testiD = (pullIdNumber(person));
-
-
-// 822843554
-
-function createParentIdArrays(array){//Creates 2 Arrays of parent id
-    let test2 = [];
-    let a = array.map(a => a.parents[0]);
-    let b = array.map(a => a.parents[1]);
-    test2.push(a);
-    test2.push(b);
-    return test2;
-}
-
-let testArray = createParentIdArrays(data);
-// console.log(testArray);
+// function createParentIdArrays(array){//Creates 2 Arrays of parent id
+//     let test2 = [];
+//     let a = array.map(a => a.parents[0]);
+//     let b = array.map(a => a.parents[1]);
+//     test2.push(a);
+//     test2.push(b);
+//     return test2;
+// }
 
 // let a = data.map(a => a.parents[0]);
 // console.log(a);
 
-function searchForParentMatch(array, value){
-    let indexes = [], i = -1, j = -1;
-    while((i = array[0].indexOf(value, i + 1)) != -1){
-        indexes.push(i);
-    }
-    while((j = array[1].indexOf(value, j + 1)) != -1){
-        indexes.push(j);
-    }
-    return indexes;
-}
+// function searchForParentMatch(array, value){
+//     let indexes = [], i = -1, j = -1;
+//     while((i = array[0].indexOf(value, i + 1)) != -1){
+//         indexes.push(i);
+//     }
+//     while((j = array[1].indexOf(value, j + 1)) != -1){
+//         indexes.push(j);
+//     }
+//     return indexes;
+// }
 
-let testChildArray = searchForParentMatch(testArray, 693243224);
+// let testChildArray = searchForParentMatch(testArray, 693243224);
 // console.log(testChildArray);
 
-function convertIndexToObject(array, childIndex){
-    let objectArray = [];
-    for(let i = 0; i < array.length && i < childIndex.length; i++){
-            // console.log(people[i]);
-            objectArray.push(array[childIndex[i]]);
-        }
+// function convertIndexToObject(array, childIndex){
+//     let objectArray = [];
+//     for(let i = 0; i < array.length && i < childIndex.length; i++){
+//             // console.log(people[i]);
+//             objectArray.push(array[childIndex[i]]);
+//         }
     
-    // console.log(objectArray);
-    return objectArray;
-}
-console.log(convertIndexToObject(data, testChildArray));
+//     // console.log(objectArray);
+//     return objectArray;
+// }
+// console.log(convertIndexToObject(data, testChildArray));
 
 // convertIndexToObject(data, )
 // console.log(searchForParentMatch(testArray, 693243224));
@@ -151,83 +137,173 @@ console.log(convertIndexToObject(data, testChildArray));
 // 	test2.push(b);
 // 	return test2;
 
-function searchByGender(array, response){
-	let foundGender = array.filter(function(person){
-    		if(person.gender == response){
-    			 console.log(person.firstName + " " + person.lastName);
-      			return true;
-    		}
-    		else{
-    			return false;
-    		} 		
-	});
-	return foundGender;
-}
+// function searchByHeightWeight(array, response){
+// 	let heightInput = prompt("Enter height:");
+// 	let weightInput = prompt("Enter weight:");
+// 	let foundHeight = searchByHeight(data, heightInput);
+// 	let foundHeightWeight = searchByWeight(foundHeight, weightInput);
+// 	return foundHeightWeight;
+// }
 
-function searchByEyeColor(array, response){
-	let foundEyeColor = array.filter(function(person){
-    		if(person.eyeColor == response){
-    			console.log(person.firstName + " " + person.lastName);
-      			return true;
-    		}
-    		else{
-    			return false;
-    		} 		
-	});
-	return foundEyeColor;
-}
+// function multiTraitSearch(array, response){
+// 	let weightResult = [];
+// 	let genderInput = prompt("Enter gender:");
+// 	let genderResult = searchByGender(data, genderInput);
+// 	let eyeColorInput = prompt("Enter eye color:");
+// 	let eyeColorResult = searchByEyeColor(genderResult, eyeColorInput);
+// 	let occupationInput = prompt("Enter occupation:");
+// 	let occupationResult = searchByOccupation(eyeColorResult, occupationInput);
+// 	let heightInput = prompt("Enter height in inches:");
+// 	let heightResult = searchByHeight(occupationResult, heightInput);
+// 	let weightInput = prompt("Enter weight:");
+// 	weightResult = searchByWeight(heightResult, weightInput);
+	// let ageInput = prompt("Enter age:");
+	// ageResult = searchByAge(weightResult, ageInput);
+// 	return weightResult;
+// }
+// console.log(multiTraitSearch(data));
 
-function searchByHeight(array, response){
-	let foundHeight = array.filter(function(person){
-    		if(person.height == response){
-    			console.log(person.firstName + " " + person.lastName);
-      			return true;
-    		}
-    		else{
-    			return false;
-    		} 		
-	});
-	return foundHeight;
-}
+// function traitSearch(array, response){
+// 	let result = [];
+// 	let searchTrait = promptFor("Do you know any traits of the person you are looking for? If yes enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If no enter 'no'.", chars);
+//         switch(searchTrait){
+//           case 'gender':
+//           let genderInput = promptFor("Enter gender:", chars);
+//           console.log(searchByGender(data, genderInput));
 
-function searchByWeight(array, response){
-	let foundWeight = array.filter(function(person){
-    		if(person.weight == response){
-    			console.log(person.firstName + " " + person.lastName);
-      			return true;
-    		}
-    		else{
-    			return false;
-    		} 		
-	});
-	return foundWeight;
-}
+//           break;
+//           case 'age':
+//           let ageInput = promptFor("Enter age:", chars);
+//           console.log(searchByAge(people, ageInput));
+//           break;
+//           case 'height':
+//           let heightInput = promptFor("Enter height in inches (ex. 5ft. 8in. is '68'):", chars);
+//           console.log(searchByHeight(people, heightInput));
+//           break;
+//           case 'weight':
+//           let weightInput = promptFor("Enter weight:", chars);
+//           console.log(searchByWeight(people, weightInput));
+//           break;
+//           case 'eye color':
+//           let eyeInput = promptFor("Enter eye color:", chars);
+//           console.log(searchByEyeColor(people, eyeInput));
+//           break;
+//           case 'occupation':
+//           let occupationInput = promptFor("Enter occupation:", chars);
+//           console.log(searchByOccupation(people, occupationInput));
+//           break;
+// }
 
-function searchByAge(array, response){
-	let foundAge = array.filter(function(person){
-    		if(person.age == response){
-    				console.log(person.firstName + " " + person.lastName);
-      			return true;
-    		}
-    		else{
-    			return false;
-    		} 		
-	});
-	return foundAge;
-}
 
-function searchByOccupation(array, response){
-	let foundOccupation = array.filter(function(person){
-    		if(person.occupation == response){
-    			console.log(person.firstName + " " + person.lastName);
-      			return true;
-    		}
-    		else{
-    			return false;
-    		} 		
-	});
-	return foundOccupation;
-}
+
+
+// function displayInfo(person){
+//     let personInfo = "First Name: " + person.firstName + "\n";
+//     personInfo += "Last Name: " + person.lastName + "\n";
+//     personInfo += "gender: " + person.gender + "\n";
+//     personInfo += "dob: " + person.dob + "\n";
+//     personInfo += "height: " + person.height + "\n";
+//     personInfo += "weight: " + person.weight + "\n";
+//     personInfo += "eyeColor: " + person.eyeColor + "\n";
+//     personInfo += "occupation: " + person.occupation + "\n";
+//     alert(personInfo);
+//     return(personInfo);
+// }
+
+// function displayPerson(person){
+  // print all of the information about a person:
+  // height, weight, age, name, occupation, eye color.
+  // let personInfo = "First Name: " + person.firstName + "\n";
+  // personInfo += "Last Name: " + person.lastName + "\n";
+  // TODO: finish getting the rest of the information to display(basically going to show the object)
+//   alert(personInfo);
+// }
+
+
+// function searchByGender(array, response){
+// 	let foundGender = array.filter(function(person){
+//     		if(person.gender == response){
+//     			 console.log(person.firstName + " " + person.lastName);
+//       			return true;
+//     		}
+//     		else{
+//     			return false;
+//     			console.log("No result with this trait");
+//     		} 		
+// 	});
+// 	return foundGender;
+// }
+
+// function searchByEyeColor(array, response){
+	// let eyeColorInput = promptFor("Enter eye color:", chars);
+// 	let foundEyeColor = array.filter(function(person){
+//     		if(person.eyeColor == response){
+//     			console.log(person.firstName + " " + person.lastName);
+//       			return true;
+//     		}
+//     		else{
+//     			return false;
+//     			console.log("No result with this trait");
+//     		} 		
+// 	});
+// 	return foundEyeColor;
+// }
+
+// function searchByHeight(array, response){
+// 	let foundHeight = array.filter(function(person){
+//     		if(person.height == response){
+//     			console.log(person.firstName + " " + person.lastName);
+//       			return true;
+//     		}
+//     		else{
+//     			return false;
+//     			console.log("No result with this trait");
+//     		} 		
+// 	});
+// 	return foundHeight;
+// }
+
+// function searchByWeight(array, response){
+// 	let foundWeight = array.filter(function(person){
+//     		if(person.weight == response){
+//     			console.log(person.firstName + " " + person.lastName);
+//       			return true;
+//     		}
+//     		else{
+//     			return false;
+//     			console.log("No result with this trait");
+//     		} 		
+// 	});
+// 	return foundWeight;
+// }
+
+// function searchByAge(array, response){
+// 	let foundAge = array.filter(function(person){
+//     		if(person.age == response){
+//     				console.log(person.firstName + " " + person.lastName);
+//       			return true;
+//     		}
+//     		else{
+//     			return false;
+//     			console.log("No result with this trait");
+//     		} 		
+// 	});
+// 	return foundAge;
+// }
+
+// function searchByOccupation(array, response){
+// 	let foundOccupation = array.filter(function(person){
+//     		if(person.occupation == response){
+//     			console.log(person.firstName + " " + person.lastName);
+//       			return true;
+//     		}
+//     		else{
+//     			return false;
+//     			console.log("No result with this trait");
+//     		} 		
+// 	});
+// 	return foundOccupation;
+// }
 
 // function displayGender(array, person){
 //     for (let i = 0; i < array.length; i++){
@@ -244,6 +320,7 @@ function searchByOccupation(array, response){
 
 // }
 // console.log(findParentId(data));
+
 // function getAge(dateString) {
 //     let today = new Date();
 //     let birthDate = new Date(dateString);
@@ -254,23 +331,25 @@ function searchByOccupation(array, response){
 //     }
 //     return age;
 // }
-// console.log(getAge(19920405))
+// console.log(getAge(19920405));
 
-function getAge(str){ //gets age from string
-	let today = new Date();
-	let birthDate = new Date(str);
-    let m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    let age = today.getFullYear() - birthDate.getFullYear();
-    return age;
-}
+// console.log(data.forEach(getAge));
 
-data.age = getAge(data.dob);
+// function getAge(str){ //gets age from string
+// 	let today = new Date();
+// 	let birthDate = new Date(str);
+//     let m = today.getMonth() - birthDate.getMonth();
+//     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+//         age--;
+//     }
+//     let age = today.getFullYear() - birthDate.getFullYear();
+//     return age;
+// }
 
-console.log(getAge(data[0].dob));
 
+// data.age = getAge(data.dob);
+
+// console.log(getAge(data[1].dob));
 
 
 // function checkAge(array){ //attempt to get array of ages
@@ -381,6 +460,15 @@ console.log(getAge(data[0].dob));
 //     return foundGender;
 // }
 // console.log(searchByGender(data, "female"));
+// function promptFor(question, valid){
+//   do{
+//     var response = prompt(question).trim();
+//   } while(!response || !valid(response));
+//   return response;
+// }
+// function chars(input){
+//   return true; // default validation only
+// }
 
 
 //game plan:
