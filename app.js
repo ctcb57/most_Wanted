@@ -5,54 +5,31 @@ Build all of your functions for displaying and gathering information below (GUI)
 
 // app is the function called to start the entire application
 function app(people){
-  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
+  let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no':", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
       let foundPerson = searchByName(people);
       mainMenu(foundPerson, people);
       break;
     case 'no':
-      let searchTrait = promptFor("Do you know any traits of the person you are looking for? If yes enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If not enter 'no'.", chars);
-        switch(searchTrait){
-          case 'gender':
-          let genderInput = promptFor("Enter gender:", chars);
-          console.log(searchByGender(data, genderInput));
+      let traitNumberSearch = promptFor("Do you want to search for all traits or one trait? Enter 'all' or 'one':", allOne).toLowerCase();
+      switch(traitNumberSearch){
+        case 'all':
+          multiTraitSearch(data);
           break;
-          case 'age':
-          let ageInput = promptFor("Enter age:", chars);
-          console.log(searchByAge(people, ageInput));
+        case 'one':
+          singleTraitSearch(data);
           break;
-          case 'height':
-          let heightInput = promptFor("Enter height in inches (ex. 5ft. 8in. is '68'):", chars);
-          console.log(searchByHeight(people, heightInput));
-          break;
-          case 'weight':
-          let weightInput = promptFor("Enter weight:", chars);
-          console.log(searchByWeight(people, weightInput));
-          break;
-          case 'eye color':
-          let eyeInput = promptFor("Enter eye color:", chars);
-          console.log(searchByEyeColor(people, eyeInput));
-          break;
-          case 'occupation':
-          let occupationInput = promptFor("Enter occupation:", chars);
-          console.log(searchByOccupation(people, occupationInput));
-          break;
-          case 'no':
-            app(people);
-          break;
-        }
+      }
+      break;
+  }
     //use yesNo function to search for traits in yes no tree
       // TODO: search by traits
     // alerts for each person returned for each criteria
-    
-      break;
-      default:
-
-    app(people); // restart app //create an alert saying no match found
+ // restart app //create an alert saying no match found
       // break;
-  
 }
+
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
@@ -154,8 +131,9 @@ function displayFamily(person){
     return personInfo;
 }
 function searchByGender(array, str){
+  let genderInput = promptFor("Enter gender:", chars);
   let foundGender = array.filter(function(person){
-        if(person.gender == str){
+        if(person.gender == genderInput){
           console.log(person.firstName + " " + person.lastName);
             return true;
         }
@@ -166,8 +144,9 @@ function searchByGender(array, str){
     return foundGender;
 }
 function searchByEyeColor(array, response){
+  let eyeInput = promptFor("Enter eye color:", chars);
   let foundEyeColor = array.filter(function(person){
-        if(person.eyeColor == response){
+        if(person.eyeColor == eyeInput){
           console.log(person.firstName + " " + person.lastName);
             return true;
         }
@@ -178,8 +157,9 @@ function searchByEyeColor(array, response){
   return foundEyeColor;
 }
 function searchByHeight(array, response){
+  let heightInput = promptFor("Enter height in inches (ex. 5ft. 8in. is '68'):", chars);
   let foundHeight = array.filter(function(person){
-        if(person.height == response){
+        if(person.height == heightInput){
           console.log(person.firstName + " " + person.lastName);
             return true;
         }
@@ -190,8 +170,9 @@ function searchByHeight(array, response){
   return foundHeight;
 }
 function searchByWeight(array, response){
+  let weightInput = promptFor("Enter weight:", chars);
   let foundWeight = array.filter(function(person){
-        if(person.weight == response){
+        if(person.weight == weightInput){
           console.log(person.firstName + " " + person.lastName);
             return true;
         }
@@ -202,8 +183,9 @@ function searchByWeight(array, response){
   return foundWeight;
 }
 function searchByAge(array, response){
+  let ageInput = promptFor("Enter age:", chars);
   let foundAge = array.filter(function(person){
-        if(person.age == response){
+        if(person.age == ageInput){
           console.log(person.firstName + " " + person.lastName);
             return true;
         }
@@ -223,10 +205,10 @@ function getAge(str){
     let age = today.getFullYear() - birthDate.getFullYear();
     return age;
 }
-
 function searchByOccupation(array, response){
+  let occupationInput = promptFor("Enter occupation:", chars);
   let foundOccupation = array.filter(function(person){
-        if(person.occupation == response){
+        if(person.occupation == occupationInput){
           console.log(person.firstName + " " + person.lastName);
             return true;
         }
@@ -236,24 +218,66 @@ function searchByOccupation(array, response){
   });
   return foundOccupation;
 }
+function multiTraitSearch(array, response){
+  let ageResult = [];
+  let genderInput = prompt("If you do not know a trait just press the enter key. Enter gender:");
+  let genderResult = searchByGender(data, genderInput);
+  let eyeColorInput = prompt("Enter eye color:");
+  let eyeColorResult = searchByEyeColor(genderResult, eyeColorInput);
+  let occupationInput = prompt("Enter occupation:");
+  let occupationResult = searchByOccupation(eyeColorResult, occupationInput);
+  let heightInput = prompt("Enter height in inches (example 5ft. 8in. is '68':");
+  let heightResult = searchByHeight(occupationResult, heightInput);
+  let weightInput = prompt("Enter weight:");
+  let weightResult = searchByWeight(heightResult, weightInput);
+  let ageInput = prompt("Enter age:");
+  ageResult = searchByAge(weightResult, ageInput);
+  return ageResult;
+}
+function singleTraitSearch(people){
+      let searchTrait = promptFor("Enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If not enter 'return'.", chars);
+        switch(searchTrait){
+          case 'gender':
+          searchByGender(data);
+          break;
+          case 'age':
+          searchByAge(data);
+          break;
+          case 'height':
+          searchByHeight(data);
+          break;
+          case 'weight':
+          searchByWeight(data);
+          break;
+          case 'eye color':
+          searchByEyeColor(data);
+          break;
+          case 'occupation':
+          searchByOccupation(data);
+          break;
+          case 'return':
+            app(people);
+          break;
+        }
+}
 function displayDescendants(person){
     let personInfo = person.id;
     for(let i = 0; i < data.length; i++)
         if(person.id = person[i].parents);
     return person[i];
 }
-function displayGender(array, person){
-  let genderInfo = [];
-    for(let i = 0, i < array.length; i++){
-      if(data[i].gender = male){
-        genderInfo = data[i].gender;
-      }
-      else{
-        genderInfo = data[i].gender;
-      }
-    }
-    return genderInfo;
-}
+// function displayGender(array, person){
+//   let genderInfo = [];
+//     for(let i = 0, i < array.length; i++){
+//       if(data[i].gender = male){
+//         genderInfo = data[i].gender;
+//       }
+//       else{
+//         genderInfo = data[i].gender;
+//       }
+//     }
+//     return genderInfo;
+// }
 function displayId(person){
     let personInfo = [];
     personInfo.push = person.id
@@ -271,7 +295,9 @@ function promptFor(question, valid){
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
-
+function allOne(input){
+  return input.toLowerCase() == "all" || input.toLowerCase() == "one";
+}
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
