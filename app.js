@@ -182,6 +182,7 @@ function searchByWeight(array, response){
   });
   return foundWeight;
 }
+
 function searchByAge(array, response){
   let ageInput = promptFor("Enter age:", chars);
   let foundAge = array.filter(function(person){
@@ -205,6 +206,8 @@ function getAge(str){
     let age = today.getFullYear() - birthDate.getFullYear();
     return age;
 }
+console.log(getAge(data[2].dob));
+
 function searchByOccupation(array, response){
   let occupationInput = promptFor("Enter occupation:", chars);
   let foundOccupation = array.filter(function(person){
@@ -234,26 +237,47 @@ function multiTraitSearch(array, response){
   ageResult = searchByAge(weightResult, ageInput);
   return ageResult;
 }
+
+function multiTraitSearch(array, response){
+  let ageResult = [];
+  let genderResult = searchByGender(data);
+      if(genderResult.length = 1){
+          alert(printSingleTraitNames(searchByGender(data)));
+      }
+  let eyeColorResult = searchByEyeColor(genderResult);
+  let occupationResult = searchByOccupation(eyeColorResult);
+      if(occupationResult.length = 1){
+          alert(printSingleTraitNames(searchByGender(data)));
+      }
+  let heightResult = searchByHeight(occupationResult);
+  let weightResult = searchByWeight(heightResult);
+  ageResult = searchByAge(weightResult);
+  return ageResult;
+}
+
+
+
+
 function singleTraitSearch(people){
       let searchTrait = promptFor("Enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If not enter 'return'.", chars);
         switch(searchTrait){
           case 'gender':
-          searchByGender(data);
+          alert(printSingleTraitNames(searchByGender(data)));
           break;
           case 'age':
-          searchByAge(data);
+          alert(printSingleTraitNames(searchByAge(data)));
           break;
           case 'height':
-          searchByHeight(data);
+          alert(printSingleTraitNames(searchByHeight(data)));
           break;
           case 'weight':
-          searchByWeight(data);
+          alert(printSingleTraitNames(searchByWeight(data)));
           break;
           case 'eye color':
-          searchByEyeColor(data);
+          alert(printSingleTraitNames(searchByEyeColor(data)));
           break;
           case 'occupation':
-          searchByOccupation(data);
+          alert(printSingleTraitNames(searchByOccupation(data)));
           break;
           case 'return':
             app(people);
@@ -346,6 +370,14 @@ function printChildNames(objectArray){
   return listOfNames;
 }
 
+function printSingleTraitNames(objectArray){
+  let listOfNames = [];
+  for(let i = 0; i < objectArray.length; i++){
+      let personInfo = objectArray[i].firstName + " " + objectArray[i].lastName;
+      listOfNames.push(personInfo);
+  }
+  return listOfNames;
+}
 function printDescendantNames(objectArray){
   let listOfNames = [];
   for(let i = 0; i < objectArray.length; i++){
