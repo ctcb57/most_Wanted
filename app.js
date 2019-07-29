@@ -45,11 +45,13 @@ function app(people){
     //use yesNo function to search for traits in yes no tree
       // TODO: search by traits
     // alerts for each person returned for each criteria
+    
       break;
       default:
+
     app(people); // restart app //create an alert saying no match found
-      break;
-  }
+      // break;
+  
 }
 
 // Menu function to call once you find who you are looking for
@@ -69,12 +71,16 @@ function mainMenu(person, people){
         alert(displayInfo(person));// TODO: get person's info
     break;
     case "family":
-        console.log(displayFamily(person));
+        findChild(data, person);
+        // console.log(displayFamily(person));
         // console.log(displayFamily(person));
         // alert(displayFamily(person)); //siblings + parents + spouse + children
     // TODO: get person's family
     break;
-    case "descendants": //need recursion here
+    case "descendants": 
+        // console.log(findChild(data, person));
+      alert(printDescendantNames(findDescendants(data, person)));
+
     // TODO: get person's descendants
     break;
     case "restart":
@@ -270,4 +276,88 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+function pullIdNumber(parent){
+  let id = parent.id;
+  return id;
+}
+
+function createParentIdArrays(array){//Creates 2 Arrays of parent id
+  let test2 = [];
+  let a = array.map(a => a.parents[0]);
+  let b = array.map(a => a.parents[1]);
+  test2.push(a);
+  test2.push(b);
+  return test2;
+}
+
+function searchForParentMatch(array, value){
+  let indexes = [], i = -1, j = -1;
+  while((i = array[0].indexOf(value, i + 1)) != -1){
+      indexes.push(i);
+  }
+  while((j = array[1].indexOf(value, j + 1)) != -1){
+      indexes.push(j);
+  }
+  return indexes;
+}
+
+function convertIndexToObject(array, childIndex){
+  let objectArray = [];
+  for(let i = 0; i < array.length && i < childIndex.length; i++){
+          objectArray.push(array[childIndex[i]]);
+      }
+  return objectArray;
+}
+
+function printChildNames(objectArray){
+  let listOfNames = [];
+  for(let i = 0; i < objectArray.length; i++){
+      let personInfo = "Child: " + objectArray[i].firstName + " " + objectArray[i].lastName;
+      console.log(personInfo);
+      listOfNames.push(personInfo);
+  }
+  return listOfNames;
+}
+
+function printDescendantNames(objectArray){
+  let listOfNames = [];
+  for(let i = 0; i < objectArray.length; i++){
+      let personInfo = "Descendant: " + objectArray[i].firstName + " " + objectArray[i].lastName;
+      console.log(personInfo);
+      listOfNames.push(personInfo);
+  }
+  return listOfNames;
+}
+
+function findChild(array, parent){
+  let separateArrays = createParentIdArrays(array);
+  let idMatch = searchForParentMatch(separateArrays, parent.id);
+  let children = convertIndexToObject(data, idMatch);
+  let childrenNames = (printChildNames(children));
+  alert(childrenNames.join("\n"));
+  return childrenNames;
+  
+}
+
+function findDescendants(array, parent){
+  let descendants = [];
+  let nonDescendants = [];
+  let separateArrays = createParentIdArrays(array);
+  let idMatch = searchForParentMatch(separateArrays, parent.id);
+  let children = convertIndexToObject(data, idMatch);
+  for(let i = 0; i < children.length; i++){
+      descendants.push(children[i]);
+      let grandchildCheck = findDescendants(data, children[i]);
+      if(!Array.isArray(grandchildCheck) || !grandchildCheck.length){
+          nonDescendants.push(grandchildCheck);
+      }
+      else{
+          descendants.push(grandchildCheck[0]); 
+      }
+  }
+  return descendants;
+  
+}
+
 

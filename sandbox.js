@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use strict"
 
 // function createParentIdArrays(array){//Creates 2 Arrays of parent id
@@ -8,10 +9,37 @@
 //     test2.push(b);
 //     return test2;
 // }
+=======
+let parent = data[8];
+// console.log(person);
+
+//this function takes the person that is taken from the prompt and pulls their ID number
+function pullIdNumber(parent){
+    let id = parent.id;
+    return id;
+}
+// let testiD = (pullIdNumber(person));
+
+
+// 822843554
+
+function createParentIdArrays(array){//Creates 2 Arrays of parent id
+    let test2 = [];
+    let a = array.map(a => a.parents[0]);
+    let b = array.map(a => a.parents[1]);
+    test2.push(a);
+    test2.push(b);
+    return test2;
+}
+
+// let testArray = createParentIdArrays(data);
+// console.log(testArray);
+>>>>>>> 50e9748d197ebb2527e42969dfc1ffe57f2e7500
 
 // let a = data.map(a => a.parents[0]);
 // console.log(a);
 
+<<<<<<< HEAD
 // function searchForParentMatch(array, value){
 //     let indexes = [], i = -1, j = -1;
 //     while((i = array[0].indexOf(value, i + 1)) != -1){
@@ -22,10 +50,23 @@
 //     }
 //     return indexes;
 // }
+=======
+function searchForParentMatch(array, value){
+    let indexes = [], i = -1, j = -1;
+    while((i = array[0].indexOf(value, i + 1)) != -1){
+        indexes.push(i);
+    }
+    while((j = array[1].indexOf(value, j + 1)) != -1){
+        indexes.push(j);
+    }
+    return indexes;
+}
+>>>>>>> 50e9748d197ebb2527e42969dfc1ffe57f2e7500
 
 // let testChildArray = searchForParentMatch(testArray, 693243224);
 // console.log(testChildArray);
 
+<<<<<<< HEAD
 // function convertIndexToObject(array, childIndex){
 //     let objectArray = [];
 //     for(let i = 0; i < array.length && i < childIndex.length; i++){
@@ -36,6 +77,15 @@
 //     // console.log(objectArray);
 //     return objectArray;
 // }
+=======
+function convertIndexToObject(array, childIndex){
+    let objectArray = [];
+    for(let i = 0; i < array.length && i < childIndex.length; i++){
+            objectArray.push(array[childIndex[i]]);
+        }
+    return objectArray;
+}
+>>>>>>> 50e9748d197ebb2527e42969dfc1ffe57f2e7500
 // console.log(convertIndexToObject(data, testChildArray));
 
 // convertIndexToObject(data, )
@@ -52,18 +102,59 @@
 
 // console.log(getAllIndexes(a, 693243224));
 
+function printChildNames(objectArray){
+    let listOfNames = [];
+    for(let i = 0; i < objectArray.length; i++){
+        let personInfo = "Child: " + objectArray[i].firstName + " " + objectArray[i].lastName;
+        // console.log(personInfo);
+        listOfNames.push(personInfo);
+    }
+    return listOfNames;
+}
+
+
 // final product of the function
-// function findChild(array, person){
-//     // let descendantArray = []
-//     let separateArrays = createParentIdArrays(array);
-//     let idMatch = searchForParentMatch(separateArrays, person.id);
-//     let children = 
-//     console.log(person.id);
-//     console.log(separateArrays);
-//     console.log(idMatch);
+function findChild(array, parent){
+    let separateArrays = createParentIdArrays(array);
+    let idMatch = searchForParentMatch(separateArrays, parent.id);
+    let children = convertIndexToObject(data, idMatch);
+    let childrenNames = (printChildNames(children));
+    return childrenNames;
+}
+
+function findDescendants(array, parent){
+    let descendants = [];
+    let nonDescendants = [];
+    let separateArrays = createParentIdArrays(array);
+    let idMatch = searchForParentMatch(separateArrays, parent.id);
+    let children = convertIndexToObject(data, idMatch);
+    for(let i = 0; i < children.length; i++){
+        descendants.push(children[i]);
+        let grandchildCheck = findDescendants(data, children[i]);
+        if(!Array.isArray(grandchildCheck) || !grandchildCheck.length){
+            nonDescendants.push(grandchildCheck);
+        }
+        else{
+            descendants.push(grandchildCheck[0]); 
+        }
+    }
+    return descendants;
+    
+}
+
+alert(printChildNames(findDescendants(data, parent)));
+
+
+
+
+// if(!Array.isArray(grandchildCheck) || !grandchildCheck.length){
+//     nonDescendants.push(grandchildCheck);
+// }
+// else{
+//     descendants.push(grandchildCheck); 
 // }
 
-// findChild(data, person);
+// console.log(findChild(data, parent));
 
 
 // / let foundParents = data.map(function(e){
@@ -347,7 +438,11 @@
 // }
 
 
+<<<<<<< HEAD
 // data.age = getAge(data.dob);
+=======
+// console.log(getAge(data[0].dob));
+>>>>>>> 50e9748d197ebb2527e42969dfc1ffe57f2e7500
 
 // console.log(getAge(data[1].dob));
 
