@@ -1,12 +1,12 @@
-let person = data[8];
+let parent = data[8];
 // console.log(person);
 
 //this function takes the person that is taken from the prompt and pulls their ID number
-function pullIdNumber(person){
-    let id = person.id;
+function pullIdNumber(parent){
+    let id = parent.id;
     return id;
 }
-let testiD = (pullIdNumber(person));
+// let testiD = (pullIdNumber(person));
 
 
 // 822843554
@@ -20,7 +20,7 @@ function createParentIdArrays(array){//Creates 2 Arrays of parent id
     return test2;
 }
 
-let testArray = createParentIdArrays(data);
+// let testArray = createParentIdArrays(data);
 // console.log(testArray);
 
 // let a = data.map(a => a.parents[0]);
@@ -37,7 +37,7 @@ function searchForParentMatch(array, value){
     return indexes;
 }
 
-let testChildArray = searchForParentMatch(testArray, 693243224);
+// let testChildArray = searchForParentMatch(testArray, 693243224);
 // console.log(testChildArray);
 
 function convertIndexToObject(array, childIndex){
@@ -50,7 +50,7 @@ function convertIndexToObject(array, childIndex){
     // console.log(objectArray);
     return objectArray;
 }
-console.log(convertIndexToObject(data, testChildArray));
+// console.log(convertIndexToObject(data, testChildArray));
 
 // convertIndexToObject(data, )
 // console.log(searchForParentMatch(testArray, 693243224));
@@ -66,18 +66,29 @@ console.log(convertIndexToObject(data, testChildArray));
 
 // console.log(getAllIndexes(a, 693243224));
 
-// final product of the function
-// function findChild(array, person){
-//     // let descendantArray = []
-//     let separateArrays = createParentIdArrays(array);
-//     let idMatch = searchForParentMatch(separateArrays, person.id);
-//     let children = 
-//     console.log(person.id);
-//     console.log(separateArrays);
-//     console.log(idMatch);
-// }
+function printChildNames(objectArray){
+    let listOfNames = [];
+    for(let i = 0; i < objectArray.length; i++){
+        let personInfo = "Child: " + objectArray[i].firstName + " " + objectArray[i].lastName;
+        console.log(personInfo);
+        listOfNames.push(personInfo);
+    }
+    return listOfNames;
+}
 
-// findChild(data, person);
+
+// final product of the function
+function findChild(array, parent){
+    let separateArrays = createParentIdArrays(array);
+    let idMatch = searchForParentMatch(separateArrays, parent.id);
+    let children = convertIndexToObject(data, idMatch);
+    let childrenNames = (printChildNames(children));
+    alert(childrenNames.join("\n"));
+    return childrenNames;
+    
+}
+
+console.log(findChild(data, parent));
 
 
 
