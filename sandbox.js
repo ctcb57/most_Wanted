@@ -1,4 +1,4 @@
-let parent = data[8];
+// let person = data[16];
 // console.log(person);
 
 //this function takes the person that is taken from the prompt and pulls their ID number
@@ -102,8 +102,75 @@ function findDescendants(array, parent){
     return descendants;
     
 }
+let person = data[16];
 
-alert(printChildNames(findDescendants(data, parent)));
+function pullParent1IdNumbers(person){
+    let parent1 = person.parents[0];
+    return parentId
+}
+
+function pullParent2IdNumbers(person){
+    let parent
+}
+
+function verifySiblingIdMatch(array, person){
+    siblingArray = [];
+    personArray = [];
+    for(let i = 0; i < array.length; i++){
+        if(array[i].id != person.id){
+            siblingArray.push(array[i]);
+        }
+        else{
+            siblingArray.push(array[i]);
+        }
+    }
+    return siblingArray;
+}
+
+function removePersonFromArray(array, person){
+    let siblings = [];
+    for(let i = 0; i < array.length; i++){
+        if(array[i].id != person.id){
+            siblings.push(array[i]);
+        }
+    }
+    return siblings;
+}
+
+function printSiblingNames(objectArray){
+    let listOfNames = [];
+    for(let i = 0; i < objectArray.length; i++){
+        let personInfo = "Sibling: " + objectArray[i].firstName + " " + objectArray[i].lastName;
+        // console.log(personInfo);
+        listOfNames.push(personInfo);
+    }
+    return listOfNames;
+}
+
+// console.log(pullParentIdNumbers(person));
+
+// alert(printChildNames(findDescendants(data, parent)));
+
+//change the code to remove all of the empty indexes 
+
+
+function findSiblings(array, person){
+    if(person.parents.length == 0){
+        alert("No Siblings")
+    }
+    else{
+        let separateArrays = createParentIdArrays(array);
+        let parent1Match = searchForParentMatch(separateArrays, person.parents[0]);
+        let parent2Match = searchForParentMatch(separateArrays, person.parents[1]);
+        let intersection = parent1Match.filter(element => parent2Match.includes(element));
+        let childrenObjects = convertIndexToObject(data, intersection);
+        let siblingObjects = removePersonFromArray(childrenObjects, person);
+        let siblingNames = printSiblingNames(siblingObjects);
+        alert(siblingNames.join("\n"));
+    }
+}
+
+findSiblings(data, person);
 
 
 
