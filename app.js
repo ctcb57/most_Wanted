@@ -15,23 +15,41 @@ function app(people){
   let searchTrait = promptFor("Do you know any traits of the person you are looking for? If yes enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If no enter 'no'.", chars);
         switch(searchTrait){
           case 'gender':
-          let userInput = promptFor("Enter gender.", chars);
-          console.log(searchByGender(people, userInput));
+          let genderInput = promptFor("Enter gender:", chars);
+          console.log(searchByGender(data, genderInput));
+          // let genderGroup = [];
+          // genderGroup = searchByGender(data, genderInput);
+          //   let searchSecondTrait = promptFor("Do you know another trait? If yes enter 'age', 'height', 'weight', 'eye color', or 'occupation'. If no enter 'no'.", chars);
+          //   switch(searchSecondTrait){
+          //     case 'age':
+          //     let ageInput = promptFor("Enter age:", chars);
+          //     console.log(searchByAge(genderGroup, ageInput));
+          //     break;
+          //     case 'occupation':
+          //     let occupationInput = promptFor("Enter occupation:", chars);
+          //     console.log(searchByAge(genderGroup, occupationInput));
+          //     break;
+            }
           break;
           case 'age':
-
+          let ageInput = promptFor("Enter age:", chars);
+          console.log(searchByAge(people, ageInput));
           break;
           case 'height':
-
+          let heightInput = promptFor("Enter height in inches (ex. 5ft. 8in. is '68'):", chars);
+          console.log(searchbyHeight(people, heightInput));
           break;
           case 'weight':
-
+          let weightInput = promptFor("Enter weight:", chars);
+          console.log(searchByWeight(people, weightInput));
           break;
           case 'eye color':
-
+          let eyeInput = promptFor("Enter eye color:", chars);
+          console.log(searchByEyeColor(people, eyeInput));
           break;
           case 'occupation':
-
+          let occupationInput = promptFor("Enter occupation:", chars);
+          console.log(searchByOccupation(people, occupationInput));
           break;
           case 'no':
 
@@ -231,6 +249,19 @@ function searchByAge(array, response){
   });
   return foundAge;
 }
+
+function getAge(str){
+  let today = new Date();
+  let birthDate = new Date(str);
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    let age = today.getFullYear() - birthDate.getFullYear();
+    return age;
+}
+
+data.age = getAge(data.dob);
 
 function searchByOccupation(array, response){
   let foundOccupation = array.filter(function(person){

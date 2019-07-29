@@ -80,9 +80,6 @@ console.log(convertIndexToObject(data, testChildArray));
 // findChild(data, person);
 
 
-
-
-
 // / let foundParents = data.map(function(e){
 //   return e.parents.e;
 // }).indexOf(693243224);
@@ -269,7 +266,12 @@ function getAge(str){ //gets age from string
     let age = today.getFullYear() - birthDate.getFullYear();
     return age;
 }
-console.log(getAge("4/5/1977"));
+
+data.age = getAge(data.dob);
+
+console.log(getAge(data[0].dob));
+
+
 
 // function checkAge(array){ //attempt to get array of ages
 // 	for(let i = 0, i.data.length, i++);
