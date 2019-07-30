@@ -194,21 +194,23 @@ function searchByOccupation(array, response){
 }
 
 function searchByAge(array, response){
-do{
-    var selection = parseInt(window.prompt("Enter age: (if age unknown enter 0)", ""), 10);
-}while(isNaN(selection) || selection > 120 || selection < 1);
-
+    // let selection = parseInt(window.prompt("Enter age:", ""), 10);
+  let selection = promptFor("Enter age:", chars);
+    // if(selection < 120 || selection > 0){
   let foundAge = array.filter(function(person){
         if(person.age == selection){
           console.log(person.firstName + " " + person.lastName);
             return true;
         }
         else{
-          return false;
-        }     
+            return false;
+        }  
   });
   return foundAge;
 }
+
+
+
 function getAge(str){
   let today = new Date();
   let birthDate = new Date(str);
@@ -231,6 +233,7 @@ dynamicAge(data);
 function multiTraitSearch(array, response){
   let ageResult = [];
   let genderResult = [];
+  let weightResult = [];
   genderResult = searchByGender(data);
     if(genderResult.length == 1){
       displayInfo(genderResult[0]);
@@ -263,7 +266,7 @@ function multiTraitSearch(array, response){
     else if(heightResult.length == 0){
       heightResult = occupationResult;
     }
-  let weightResult = searchByWeight(heightResult);
+  weightResult = searchByWeight(heightResult);
     if(weightResult.length == 1){
       displayInfo(weightResult[0]);
       return;
@@ -271,22 +274,22 @@ function multiTraitSearch(array, response){
     else if(weightResult.length == 0){
       weightResult = heightResult;
     }
-  ageResult = searchByAge(weightResult);
-    if(ageResult.length == 1){
-      displayInfo(ageResult[0]);
-      return;
-    }
-    else if(ageResult.length == 0){
-      displayInfo(weightResult);
-      return;
-    }
-    else{
-      for(let i = 0; i < ageResult.length; i++){
-        displayInfo(ageResult[i]);
-    }
-    return ageResult;
-    }
-}
+    ageResult = searchByAge(weightResult);
+      if(ageResult.length == 1){
+        displayInfo(ageResult[0]);
+        return;
+      }
+      else if(ageResult.length == 0){
+        displayPeople(weightResult);
+        return;
+      }
+      else{
+        for(let i = 0; i < ageResult.length; i++){
+          displayPeople(ageResult);
+      }
+      return ageResult;
+      }
+  }  
 
 function singleTraitSearch(people){
       let searchTrait = promptFor("Enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If not enter 'return'.", traitPrompt).toLowerCase();
