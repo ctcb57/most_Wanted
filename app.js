@@ -45,18 +45,14 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
         console.log(displayInfo(person));
-        alert(displayInfo(person));// TODO: get person's info
-    break;
+        displayInfo(person);
+        return;
     case "family":
         createFamily(data, person);
-    // TODO: get person's family
-    break;
+        return;
     case "descendants": 
-        // console.log(findChild(data, person));
-      alert(printDescendantNames(findDescendants(data, person)));
-
-    // TODO: get person's descendants
-    break;
+        alert(printDescendantNames(findDescendants(data, person)));
+        return;
     case "restart":
     app(people); // restart
     break;
@@ -453,9 +449,7 @@ function findDescendants(array, parent){
       else{
           descendants.push(grandchildCheck[0]); 
       }
-  }
-  return descendants;
-  
+  }  
 }
 
 function verifySiblingIdMatch(array, person){
