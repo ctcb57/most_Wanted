@@ -128,11 +128,11 @@ function displayFamily(person){
     return personInfo;
 }
 function searchByGender(array, str){
-  let genderInput = promptFor("Enter gender:", chars);
+  let genderInput = promptFor("Enter gender 'female', 'male', or 'unknown:", feMale);
   let foundGender = array.filter(function(person){
         if(person.gender == genderInput){
           console.log(person.firstName + " " + person.lastName);
-            return true;
+          return true;
         }
         else{
           return false;
@@ -141,7 +141,7 @@ function searchByGender(array, str){
     return foundGender;
 }
 function searchByEyeColor(array, response){
-  let eyeInput = promptFor("Enter eye color:", chars);
+  let eyeInput = promptFor("Enter eye color 'blue', 'black', 'brown', 'hazel', 'green', or 'unknown':", eyeColorChoice);
   let foundEyeColor = array.filter(function(person){
         if(person.eyeColor == eyeInput){
           console.log(person.firstName + " " + person.lastName);
@@ -179,29 +179,6 @@ function searchByWeight(array, response){
   });
   return foundWeight;
 }
-function searchByAge(array, response){
-  let ageInput = promptFor("Enter age:", chars);
-  let foundAge = array.filter(function(person){
-        if(person.age == ageInput){
-          console.log(person.firstName + " " + person.lastName);
-            return true;
-        }
-        else{
-          return false;
-        }     
-  });
-  return foundAge;
-}
-function getAge(str){
-  let today = new Date();
-  let birthDate = new Date(str);
-    let m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    let age = today.getFullYear() - birthDate.getFullYear();
-    return age;
-}
 function searchByOccupation(array, response){
   let occupationInput = promptFor("Enter occupation:", chars);
   let foundOccupation = array.filter(function(person){
@@ -215,42 +192,122 @@ function searchByOccupation(array, response){
   });
   return foundOccupation;
 }
+
+function searchByAge(array, response){
+do{
+    var selection = parseInt(window.prompt("Enter age: (if age unknown enter 0)", ""), 10);
+}while(isNaN(selection) || selection > 120 || selection < 1);
+
+  let foundAge = array.filter(function(person){
+        if(person.age == selection){
+          console.log(person.firstName + " " + person.lastName);
+            return true;
+        }
+        else{
+          return false;
+        }     
+  });
+  return foundAge;
+}
+function getAge(str){
+  let today = new Date();
+  let birthDate = new Date(str);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+// console.log(getAge(data[2].dob));
+function dynamicAge(array){
+  for(let i = 0; i < array.length; i++){
+    array[i].age = getAge(array[i].dob);
+  }
+}
+dynamicAge(data);
+
 function multiTraitSearch(array, response){
   let ageResult = [];
-  let genderInput = prompt("If you do not know a trait just press the enter key. Enter gender:");
-  let genderResult = searchByGender(data, genderInput);
-  let eyeColorInput = prompt("Enter eye color:");
-  let eyeColorResult = searchByEyeColor(genderResult, eyeColorInput);
-  let occupationInput = prompt("Enter occupation:");
-  let occupationResult = searchByOccupation(eyeColorResult, occupationInput);
-  let heightInput = prompt("Enter height in inches (example 5ft. 8in. is '68':");
-  let heightResult = searchByHeight(occupationResult, heightInput);
-  let weightInput = prompt("Enter weight:");
-  let weightResult = searchByWeight(heightResult, weightInput);
-  let ageInput = prompt("Enter age:");
-  ageResult = searchByAge(weightResult, ageInput);
-  return ageResult;
+  let genderResult = [];
+  genderResult = searchByGender(data);
+    if(genderResult.length == 1){
+      displayInfo(genderResult[0]);
+      return;
+    }
+    else if(genderResult.length == 0){
+      genderResult = data;
+    }
+  let eyeColorResult = searchByEyeColor(genderResult);
+    if(eyeColorResult.length == 1){
+      displayInfo(eyeColorResult[0]);
+      return;
+    }
+    else if(eyeColorResult.length == 0){
+      eyeColorResult = genderResult;
+    }
+  let occupationResult = searchByOccupation(eyeColorResult);
+    if(occupationResult.length == 1){
+      displayInfo(occupationResult[0]);
+      return;
+    }
+    else if(occupationResult.length == 0){
+      occupationResult = eyeColorResult;
+    }
+  let heightResult = searchByHeight(occupationResult);
+    if(heightResult.length == 1){
+      displayInfo(heightResult[0]);
+      return;
+    }
+    else if(heightResult.length == 0){
+      heightResult = occupationResult;
+    }
+  let weightResult = searchByWeight(heightResult);
+    if(weightResult.length == 1){
+      displayInfo(weightResult[0]);
+      return;
+    }
+    else if(weightResult.length == 0){
+      weightResult = heightResult;
+    }
+  ageResult = searchByAge(weightResult);
+    if(ageResult.length == 1){
+      displayInfo(ageResult[0]);
+      return;
+    }
+    else if(ageResult.length == 0){
+      displayInfo(weightResult);
+      return;
+    }
+    else{
+      for(let i = 0; i < ageResult.length; i++){
+        displayInfo(ageResult[i]);
+    }
+    return ageResult;
+    }
 }
+
 function singleTraitSearch(people){
-      let searchTrait = promptFor("Enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If not enter 'return'.", chars);
+      let searchTrait = promptFor("Enter one of the following: 'gender', 'age', 'height', 'weight', 'eye color', or 'occupation'. If not enter 'return'.", traitPrompt).toLowerCase();
         switch(searchTrait){
           case 'gender':
-          searchByGender(data);
+          alert(printSingleTraitNames(searchByGender(data)));
           break;
           case 'age':
-          searchByAge(data);
+          alert(printSingleTraitNames(searchByAge(data)));
           break;
           case 'height':
-          searchByHeight(data);
+          alert(printSingleTraitNames(searchByHeight(data)));
           break;
           case 'weight':
-          searchByWeight(data);
+          alert(printSingleTraitNames(searchByWeight(data)));
           break;
           case 'eye color':
-          searchByEyeColor(data);
+          alert(printSingleTraitNames(searchByEyeColor(data)));
           break;
           case 'occupation':
-          searchByOccupation(data);
+          alert(printSingleTraitNames(searchByOccupation(data)));
           break;
           case 'return':
             app(people);
@@ -295,9 +352,18 @@ function yesNo(input){
 function allOne(input){
   return input.toLowerCase() == "all" || input.toLowerCase() == "one";
 }
+function traitPrompt(input){
+  return input.toLowerCase() == "gender" || input.toLowerCase() == "age" || input.toLowerCase() == "height" || input.toLowerCase() == "weight" || input.toLowerCase() == "eye color" || input.toLowerCase() == "occupation" || input.toLowerCase() == "return";
+}
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+function feMale(input){
+  return input.toLowerCase() == "female" || input.toLowerCase() == "male" || input.toLowerCase() == 'unknown';
+}
+function eyeColorChoice(input){
+  return input.toLowerCase() == "blue" || input.toLowerCase() == 'black' || input.toLowerCase() == 'brown' || input.toLowerCase() == 'hazel' || input.toLowerCase() == 'green' || input.toLowerCase() == 'unknown';
 }
 
 function pullIdNumber(parent){
@@ -343,6 +409,14 @@ function printChildNames(objectArray){
   return listOfNames;
 }
 
+function printSingleTraitNames(objectArray){
+  let listOfNames = [];
+  for(let i = 0; i < objectArray.length; i++){
+      let personInfo = objectArray[i].firstName + " " + objectArray[i].lastName;
+      listOfNames.push(personInfo);
+  }
+  return listOfNames;
+}
 function printDescendantNames(objectArray){
   let listOfNames = [];
   for(let i = 0; i < objectArray.length; i++){
