@@ -1,9 +1,5 @@
 "use strict"
-/*
-Build all of your functions for displaying and gathering information below (GUI).
-*/
 
-// app is the function called to start the entire application
 function app(people){
   let searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no':", yesNo).toLowerCase();
   switch(searchType){
@@ -23,25 +19,17 @@ function app(people){
       }
       break;
   }
-    //use yesNo function to search for traits in yes no tree
-      // TODO: search by traits
-    // alerts for each person returned for each criteria
- // restart app //create an alert saying no match found
-      // break;
 }
 
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people){
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
-//dynamically add spouse name
   if(!person){
     alert("Could not find that individual.");
-    return app(people); // restart
+    return app(people); 
   }
 
   let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
-  // Create a function to gather info for each case with an alert
   switch(displayOption){
     case "info":
         console.log(displayInfo(person));
@@ -54,12 +42,12 @@ function mainMenu(person, people){
         alert(printDescendantNames(findDescendants(data, person)));
         return;
     case "restart":
-    app(people); // restart
+    app(people); 
     break;
     case "quit":
-    return; // stop execution
+    return;
     default:
-    return mainMenu(person, people); // ask again
+    return mainMenu(person, people); 
   }
 }
 function upperCaseFirstLetter(phrase){
@@ -75,9 +63,6 @@ function searchByName(people){
   let firstName = upperCaseFirstLetter(promptFor("What is the person's first name?", chars));
   let lastName = upperCaseFirstLetter(promptFor("What is the person's last name?", chars));
 
-  // let capFirstName = upperCaseFirstLetter(firstName);
-  // let capLastName = upperCaseFirstLetter(lastName);
-
   let foundPerson = people.filter(function(person){
     if(person.firstName === firstName && person.lastName === lastName){
       return true;
@@ -86,23 +71,19 @@ function searchByName(people){
       return false;
     }
   });
-  // create a function that searches the array and finds a match
-  // TODO: find the person using the name they entered
+
   return foundPerson[0];
 }
-// alerts a list of people
+
 function displayPeople(people){
   alert(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
-// When looking for descendants or family(link it to the main menu)
+
 function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display(basically going to show the object)
   alert(personInfo);
 }
 function displayInfo(person){
@@ -190,9 +171,7 @@ function searchByOccupation(array, response){
 }
 
 function searchByAge(array, response){
-    // let selection = parseInt(window.prompt("Enter age:", ""), 10);
   let selection = promptFor("Enter age:", chars);
-    // if(selection < 120 || selection > 0){
   let foundAge = array.filter(function(person){
         if(person.age == selection){
           console.log(person.firstName + " " + person.lastName);
@@ -218,7 +197,6 @@ function getAge(str){
     return age;
 }
 
-// console.log(getAge(data[2].dob));
 function dynamicAge(array){
   for(let i = 0; i < array.length; i++){
     array[i].age = getAge(array[i].dob);
@@ -319,18 +297,7 @@ function displayDescendants(person){
         if(person.id = person[i].parents);
     return person[i];
 }
-// function displayGender(array, person){
-//   let genderInfo = [];
-//     for(let i = 0, i < array.length; i++){
-//       if(data[i].gender = male){
-//         genderInfo = data[i].gender;
-//       }
-//       else{
-//         genderInfo = data[i].gender;
-//       }
-//     }
-//     return genderInfo;
-// }
+
 function displayId(person){
     let personInfo = [];
     personInfo.push = person.id
@@ -343,7 +310,7 @@ function promptFor(question, valid){
   } while(!response || !valid(response));
   return response;
 }
-// promptFor function ensures they answer the question with our provided options, in this case 'yes' or 'no'
+
 // helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
@@ -356,7 +323,7 @@ function traitPrompt(input){
 }
 // helper function to pass in as default promptFor validation
 function chars(input){
-  return true; // default validation only
+  return true;
 }
 function feMale(input){
   return input.toLowerCase() == "female" || input.toLowerCase() == "male" || input.toLowerCase() == 'unknown';
@@ -370,7 +337,7 @@ function pullIdNumber(parent){
   return id;
 }
 
-function createParentIdArrays(array){//Creates 2 Arrays of parent id
+function createParentIdArrays(array){
   let test2 = [];
   let a = array.map(a => a.parents[0]);
   let b = array.map(a => a.parents[1]);
@@ -401,7 +368,7 @@ function convertIndexToObject(array, childIndex){
 function printChildNames(objectArray){
   let listOfNames = [];
   for(let i = 0; i < objectArray.length; i++){
-      let personInfo = "Child: " + objectArray[i].firstName + " " + objectArray[i].lastName;
+      let personInfo = "Child: " + objectArray[i].firstName + " " + objectArray[i].lastName + "\n";
       console.log(personInfo);
       listOfNames.push(personInfo);
   }
@@ -419,7 +386,7 @@ function printSingleTraitNames(objectArray){
 function printDescendantNames(objectArray){
   let listOfNames = [];
   for(let i = 0; i < objectArray.length; i++){
-      let personInfo = "Descendant: " + objectArray[i].firstName + " " + objectArray[i].lastName;
+      let personInfo = "Descendant: " + objectArray[i].firstName + " " + objectArray[i].lastName + "\n";
       console.log(personInfo);
       listOfNames.push(personInfo);
   }
@@ -449,7 +416,8 @@ function findDescendants(array, parent){
       else{
           descendants.push(grandchildCheck[0]); 
       }
-  }  
+  }
+  return descendants;  
 }
 
 function verifySiblingIdMatch(array, person){
@@ -480,7 +448,6 @@ function printSiblingNames(objectArray){
   let listOfNames = [];
   for(let i = 0; i < objectArray.length; i++){
       let personInfo = "Sibling: " + objectArray[i].firstName + " " + objectArray[i].lastName;
-      // console.log(personInfo);
       listOfNames.push(personInfo);
   }
   return listOfNames;
