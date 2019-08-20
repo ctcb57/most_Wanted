@@ -124,7 +124,7 @@ function displayFamily(person){
     return personInfo;
 }
 function searchByGender(array, str){
-  let genderInput = promptFor("Enter gender 'female', 'male', or 'unknown:", feMale);
+  let genderInput = promptFor("Enter gender 'female', 'male', or 'unknown':", feMale);
   let foundGender = array.filter(function(person){
         if(person.gender == genderInput){
           console.log(person.firstName + " " + person.lastName);
@@ -233,6 +233,7 @@ function multiTraitSearch(array, response){
   genderResult = searchByGender(data);
     if(genderResult.length == 1){
       displayInfo(genderResult[0]);
+      mainMenu(genderResult[0], data);
       return;
     }
     else if(genderResult.length == 0){
@@ -240,7 +241,8 @@ function multiTraitSearch(array, response){
     }
   let eyeColorResult = searchByEyeColor(genderResult);
     if(eyeColorResult.length == 1){
-      displayInfo(eyeColorResult[0]);
+      // displayInfo(eyeColorResult[0]);
+      mainMenu(eyeColorResult[0], data);
       return;
     }
     else if(eyeColorResult.length == 0){
@@ -248,7 +250,9 @@ function multiTraitSearch(array, response){
     }
   let occupationResult = searchByOccupation(eyeColorResult);
     if(occupationResult.length == 1){
-      displayInfo(occupationResult[0]);
+      let foundPerson = occupationResult[0];
+      displayInfo(foundPerson);
+      mainMenu(foundPerson, data);
       return;
     }
     else if(occupationResult.length == 0){
@@ -256,7 +260,8 @@ function multiTraitSearch(array, response){
     }
   let heightResult = searchByHeight(occupationResult);
     if(heightResult.length == 1){
-      displayInfo(heightResult[0]);
+      // displayInfo(heightResult[0]);
+      mainMenu(heightResult[0], data);
       return;
     }
     else if(heightResult.length == 0){
@@ -264,7 +269,8 @@ function multiTraitSearch(array, response){
     }
   weightResult = searchByWeight(heightResult);
     if(weightResult.length == 1){
-      displayInfo(weightResult[0]);
+      // displayInfo(weightResult[0]);
+      mainMenu(weightResult[0], data);
       return;
     }
     else if(weightResult.length == 0){
@@ -272,7 +278,8 @@ function multiTraitSearch(array, response){
     }
     ageResult = searchByAge(weightResult);
       if(ageResult.length == 1){
-        displayInfo(ageResult[0]);
+        // displayInfo(ageResult[0]);
+        mainMenu(ageResult[0], data);
         return;
       }
       else if(ageResult.length == 0){
